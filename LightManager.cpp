@@ -92,12 +92,9 @@ void LightManager::testPatternFullCount(int blinkSpeed) {
 
 //	byte channelIndex = (millis()%(totalChannels*blinkSpeed))/blinkSpeed;
 	byte fullCounts = NUM_TLCS*16;
-	byte channelIndex = (millis()%(fullCounts*blinkSpeed))/blinkSpeed;
+	byte channelIndex = (millis() % ((long)fullCounts*(long)blinkSpeed)) / (long) blinkSpeed;
 	Tlc.set(channelIndex, 0);
-//	this->setColorToChannel(channelArray[channelIndex], 255, 255, 255);
-//	info_println(channelIndex);
 }
-
 
 
 void LightManager::setColorToChannel(TLC_CHANNEL_TYPE channelToSet, byte red, byte green, byte  blue) {
