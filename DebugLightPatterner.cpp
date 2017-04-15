@@ -12,7 +12,7 @@ DebugLightPatterner::DebugLightPatterner(SingletonManager* _singleMan):
 }
 
 void DebugLightPatterner::drawPattern() {
-	int blinkSpeed=400;
+	int blinkSpeed=250;
 
 	for(int i=0; i < singleMan->lightMan()->getTotalChannels(); i++) {
 		singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 0, 0, 0);
@@ -56,10 +56,7 @@ void DebugLightPatterner::testPatternStationCount(int blinkSpeed) {
 	byte channelOffset = stationIndex*5;
 	for(int i=channelOffset; i<channelOffset+5; i++) {
 		singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 255, 255, 255);
-//		info_print(i);
-//		info_print("  ");
 	}
-//	info_println(" ");
 }
 
 void DebugLightPatterner::testPatternStationChannelCount(int blinkSpeed) {
@@ -67,15 +64,10 @@ void DebugLightPatterner::testPatternStationChannelCount(int blinkSpeed) {
 
 	for(int i=stationIndex; i<singleMan->lightMan()->getTotalChannels(); i+=5) {
 		singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 255, 255, 255);
-//		info_print(i);
-//		info_print("  ");
 	}
-//	info_println(" ");
 }
 
 void DebugLightPatterner::testPatternFullCount(int blinkSpeed) {
-
-//	byte channelIndex = (millis()%(totalChannels*blinkSpeed))/blinkSpeed;
 	byte fullCounts = NUM_TLCS*16;
 	byte channelIndex = (millis() % ((long)fullCounts*(long)blinkSpeed)) / (long) blinkSpeed;
 	Tlc.set(channelIndex, 0);

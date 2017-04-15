@@ -72,32 +72,5 @@
 #define CH_29 89
 #define CH_30 92
 
-// timers:
-// Pins 5 and 6: controlled by timer0
-// Pins 9 and 10: controlled by timer1
-// Pins 11 and 3: controlled by timer2
-
-//////////////// 10DIGITAL PINS
-// #define serialRX 0		// Used for serial debugging
-// #define serialTX 1		// Used for serial debugging
-/*
-MEGA 2560
-
-PWM.12	White			BLANK
-PWM.11	Blue			XLAT
-PWM.9	Brown			GSCLK
-
-D.51 (MOSI)		Green	SIN
-D.52 (SCLK)		Red		SCLK
-
-D.48	ToggleSwitch
-A.0		Left Dial
-A.1		Right Dial
-
-GND		Black
-Vin		Yellow
-*/
-
-
 
 #endif // __PROJECTDEFS_H__
