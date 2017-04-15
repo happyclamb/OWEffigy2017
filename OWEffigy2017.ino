@@ -41,11 +41,7 @@ https://www.sparkfun.com/tutorials/329
 void loop() {
 
 	singleMan->inputMan()->updateValues();
-
-	if(singleMan->inputMan()->isToggleUp())
-		singleMan->lightMan()->testPattern();
-	else
-		singleMan->lightMan()->solidWheelColorChange();
+	singleMan->lightMan()->updateLights();
 
 	delay(100);
 }
