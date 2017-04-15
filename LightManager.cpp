@@ -18,9 +18,9 @@ LightManager::LightManager(SingletonManager* _singleMan):
 		for(int j=0;j<5;j++) {
 			channelArray[(i*5)+j] = (i*16)+(j*3);
 
-			info_print((i*5)+j);
-			info_print(": ");
-			info_println(channelArray[(i*5)+j]);
+			debug_print((i*5)+j);
+			debug_print(": ");
+			debug_println(channelArray[(i*5)+j]);
 		}
   }
 

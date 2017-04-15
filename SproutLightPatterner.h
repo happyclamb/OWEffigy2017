@@ -2,7 +2,6 @@
 #define __SPROUTLIGHTPATTERNER_H__
 
 #include <Arduino.h>
-#include <Tlc5940.h>
 
 #include "ProjectDefs.h"
 

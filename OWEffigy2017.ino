@@ -22,10 +22,9 @@ void setup() {
 	LightManager *lightMan = new LightManager(singleMan);
 	delay(50); // Wait for light to init before continuing
 
+	info_println("Info Logging enabled");
 	debug_println("Debug Logging enabled");
 	timing_println("Timing Logging enabled");
-	info_println("Info Logging enabled");
-
 }
 
 /*

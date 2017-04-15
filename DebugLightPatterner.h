@@ -2,7 +2,6 @@
 #define __DEBUGLIGHTPATTERNER_H__
 
 #include <Arduino.h>
-#include <Tlc5940.h>
 
 #include "ProjectDefs.h"
 
@@ -18,10 +17,10 @@ class DebugLightPatterner {
 	private:
 		SingletonManager* singleMan = NULL;
 
-		void testPatternRGBAll(int blinkSpeed);
-		void testPatternStationCount(int blinkSpeed);
-		void testPatternStationChannelCount(int blinkSpeed);
-		void testPatternFullCount(int blinkSpeed);
+		void testPatternRGBAll(long blinkSpeed);
+		void testPatternStationCount(long blinkSpeed);
+		void testPatternStationChannelCount(long blinkSpeed);
+		void testPatternFullCount(long blinkSpeed);
 };
 
 #endif // __DEBUGLIGHTPATTERNER_H__
