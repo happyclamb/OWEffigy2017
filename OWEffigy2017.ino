@@ -42,5 +42,5 @@ void loop() {
 	singleMan->inputMan()->updateValues();
 	singleMan->lightMan()->updateLights();
 
-	delay(100);
+	delay(50);
 }
