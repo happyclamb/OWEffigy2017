@@ -41,20 +41,20 @@ void LightManager::updateLights() {
 	Tlc.update();
 }
 
-void LightManager::setColorToChannel(TLC_CHANNEL_TYPE channelToSet, byte red, byte green, byte  blue) {
-	int brightness = map(singleMan->inputMan()->getLeftDial(), 0, 1023, 4095, 0);
-
+void LightManager::setColorToChannel(TLC_CHANNEL_TYPE channelToSet, byte red, byte green, byte blue, int brightness /*-1*/) {
+	if(brightness < 0)
+		brightness = map(singleMan->inputMan()->getLeftDial(), 0, 1023, 4095, 0);
 	Tlc.set(channelToSet+0, map(red  , 0, 255, 4095, brightness));
 	Tlc.set(channelToSet+1, map(green, 0, 255, 4095, brightness));
 	Tlc.set(channelToSet+2, map(blue , 0, 255, 4095, brightness));
 }
 
-void LightManager::setColorToChannelFromWheelPosition(TLC_CHANNEL_TYPE channelToSet, byte wheelPos) {
+void LightManager::setColorToChannelFromWheelPosition(TLC_CHANNEL_TYPE channelToSet, byte wheelPos, int brightness /*-1*/) {
 	byte r=0;
 	byte g=0;
 	byte b=0;
 	this->colorFromWheelPosition(wheelPos, &r, &g, &b);
-	this->setColorToChannel(channelToSet, r, g, b);
+	this->setColorToChannel(channelToSet, r, g, b, brightness);
 }
 
 void LightManager::colorFromWheelPosition(byte wheelPos, byte *r, byte *g, byte *b) {

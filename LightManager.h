@@ -21,11 +21,10 @@ class LightManager {
 
 		void updateLights(); // called from interrupt handler
 
-		void setColorToChannel(TLC_CHANNEL_TYPE channelToSet, byte red, byte green, byte  blue);
-		void colorFromWheelPosition(byte wheelPos, byte *r, byte *g, byte *b);
-		void setColorToChannelFromWheelPosition(TLC_CHANNEL_TYPE channelToSet, byte wheelPos);
+		void setColorToChannel(TLC_CHANNEL_TYPE channelToSet, byte red, byte green, byte  blue, int brightness=-1);
+		void setColorToChannelFromWheelPosition(TLC_CHANNEL_TYPE channelToSet, byte wheelPos, int brightness=-1);
 
-		void solidWheelColorChange();
+		void colorFromWheelPosition(byte wheelPos, byte *r, byte *g, byte *b);
 
 		int getTotalChannels() { return this->totalChannels; }
 		// GROSS: Forgot Arrays are 2nd class citizens in C - cheated and made it public
