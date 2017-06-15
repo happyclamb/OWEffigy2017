@@ -5,6 +5,9 @@
 //#define DEBUG
 //#define TIMING
 
+// MODIFY: C:\Users\clamb\Documents\Arduino\libraries\Tlc5940
+// #define NUM_TLCS    5
+
 #ifdef INFO
  #define info_print(x)     Serial.print(x)
  #define info_println(x)   Serial.println(x)
