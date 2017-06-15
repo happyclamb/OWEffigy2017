@@ -23,16 +23,13 @@ class SproutLightPatterner {
 		TLC_CHANNEL_TYPE stemArray[5];
 		TLC_CHANNEL_TYPE hubArray[5];
 
-		void drawSeed();
-		void drawPetal();
-		void drawStem();
-		void drawHub();
+		unsigned long choosePattern(int currPattern, byte patternVar);
+		unsigned long pattern_00(byte solidColour);
+		unsigned long pattern_01(byte unused);
+		unsigned long pattern_02(byte unused);
 
 		void colorWheelSnippetFade(TLC_CHANNEL_TYPE colorArray[], int arraySize, int patternSpeedModifier,
 				int brightnessSpeedModifier, byte wheelBegin, byte wheelEnd, bool wrap=false);
-		void chaseColor(TLC_CHANNEL_TYPE colorArray[], int arraySize, int patternSpeedModifier,
-			double redMultiplier, double greenMultiplier, double blueMultiplier);
-		void dialedColor(TLC_CHANNEL_TYPE colorArray[], int arraySize, bool doOutput);
 };
 
 #endif // __SPROUTLIGHTPATTERNER_H__
