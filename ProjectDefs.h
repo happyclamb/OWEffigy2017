@@ -7,6 +7,9 @@
 
 // MODIFY: C:\Users\clamb\Documents\Arduino\libraries\Tlc5940
 // #define NUM_TLCS    5
+// Also changed:
+//  #define TLC_PWM_PERIOD    8075
+// #define TLC_GSCLK_PERIOD    4
 
 #ifdef INFO
  #define info_print(x)     Serial.print(x)
