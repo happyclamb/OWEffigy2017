@@ -11,13 +11,19 @@ DebugLightPatterner::DebugLightPatterner(SingletonManager* _singleMan):
 }
 
 void DebugLightPatterner::drawPattern() {
-	long blinkSpeed=350;
+	long blinkSpeed=500;
 
 	for(int i=0; i < singleMan->lightMan()->getTotalChannels(); i++) {
 		singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 0, 0, 0);
 	}
 
-	switch(map(singleMan->inputMan()->getRightDial(), 0, 1023, 0, 3))
+	static int currPattern = 0;
+	int newPattern =  map(singleMan->inputMan()->getRightDial(), 0, 1023, 0, 3);
+	if(newPattern != currPattern) {
+		currPattern = newPattern;
+		info_println(newPattern);
+	}
+	switch(currPattern)
 	{
 		case 0:
 			testPatternRGBAll(blinkSpeed);
@@ -54,7 +60,10 @@ void DebugLightPatterner::testPatternStationCount(long blinkSpeed) {
 
 	byte channelOffset = stationIndex*5;
 	for(int i=channelOffset; i<channelOffset+5; i++) {
-		singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 255, 255, 255);
+		if(i == 0)
+			singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 255, 0, 0);
+		else
+			singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 255, 255, 255);
 	}
 }
 
@@ -62,7 +71,10 @@ void DebugLightPatterner::testPatternStationChannelCount(long blinkSpeed) {
 	byte stationIndex = (millis()%(5*blinkSpeed))/blinkSpeed;
 
 	for(int i=stationIndex; i<singleMan->lightMan()->getTotalChannels(); i+=5) {
-		singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 255, 255, 255);
+		if(i == 0)
+			singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 255, 0, 0);
+		else
+			singleMan->lightMan()->setColorToChannel(singleMan->lightMan()->channelArray[i], 255, 255, 255);
 	}
 }
 
