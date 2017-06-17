@@ -70,20 +70,22 @@ unsigned long SproutLightPatterner::choosePattern(int currPattern, byte patternV
 	return nextLength;
 }
 
-unsigned long SproutLightPatterner::pattern_00(byte solidColour) {
-	colorWheelSnippetFade(seedArray,   5,   1, 8,  solidColour, solidColour);
-	colorWheelSnippetFade(hubArray,    5,   1, 8,  solidColour, solidColour);
-	colorWheelSnippetFade(petalArray, 10,   1, 8,  solidColour, solidColour);
-	colorWheelSnippetFade(stemArray,   5,   1, 8,  solidColour, solidColour);
-	return 1000*5; // 5 sec
-}
-unsigned long SproutLightPatterner::pattern_01(byte unused) {
+unsigned long SproutLightPatterner::pattern_00(byte unused) {
 	colorWheelSnippetFade(seedArray,   5,   4, 5,   60, 100);
 	colorWheelSnippetFade(hubArray,    5,   6, 0,    0, 255,   true);
 	colorWheelSnippetFade(petalArray, 10,   2, 10,  125, 235);
 	colorWheelSnippetFade(stemArray,   5,   8, 20,    0,  40);
 	return 1000*20; // 20 sec
 }
+
+unsigned long SproutLightPatterner::pattern_01(byte solidColour) {
+	colorWheelSnippetFade(seedArray,   5,   1, 8,  solidColour, solidColour);
+	colorWheelSnippetFade(hubArray,    5,   1, 8,  solidColour, solidColour);
+	colorWheelSnippetFade(petalArray, 10,   1, 8,  solidColour, solidColour);
+	colorWheelSnippetFade(stemArray,   5,   1, 8,  solidColour, solidColour);
+	return 1000*5; // 5 sec
+}
+
 unsigned long SproutLightPatterner::pattern_02(byte unused) {
 
 	for(int i=0; i<25; i++) {
@@ -112,7 +114,7 @@ void SproutLightPatterner::colorWheelSnippetFade(TLC_CHANNEL_TYPE colorArray[], 
 		int totalBrightSteps = 628;
 		int brightnessAngleIndex = (currTime%(totalBrightSteps*timeBetweenBrightnesses))/timeBetweenBrightnesses;
 		float cosBright = cos(brightnessAngleIndex/100.0);
-		brightness = (cosBright + 1.0)*1800.0; // never turn it all the way off
+		brightness = (cosBright + 1.0)*1300.0; // never turn it all the way off
 	}
 
 	int stepRange = wheelEnd-wheelBegin;
