@@ -26,7 +26,7 @@ class SproutLightPatterner {
 		unsigned long choosePattern(int currPattern);
 		unsigned long pattern_general_colors();
 		unsigned long pattern_solid_fade();
-		unsigned long pattern_disco();
+		unsigned long pattern_circus();
 
 		void colorWheelSnippetFade(TLC_CHANNEL_TYPE colorArray[], int arraySize, int patternSpeed,
 				int brightnessSpeed, byte wheelBegin, byte wheelEnd, bool wrap=false);

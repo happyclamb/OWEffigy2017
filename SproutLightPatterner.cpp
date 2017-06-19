@@ -45,7 +45,7 @@ void SproutLightPatterner::drawPattern() {
 
 	if(nextPatternSwitch <= millis()) {
 		currPattern++;
-		if(currPattern >= 4)
+		if(currPattern >= 5)
 			currPattern = 0;
 
 		nextPatternSwitch = millis() + choosePattern(currPattern);
@@ -59,13 +59,15 @@ unsigned long SproutLightPatterner::choosePattern(int currPattern)
 	unsigned long nextLength = 0;
 
 	if(currPattern == 0)
-		nextLength = pattern_solid_fade();
-	else if(currPattern == 1)
 		nextLength = pattern_general_colors();
+	else if(currPattern == 1)
+		nextLength = pattern_solid_fade();
 	else if(currPattern == 2)
-		nextLength = pattern_disco();
-		else if(currPattern == 3)
-			nextLength = pattern_general_colors();
+		nextLength = pattern_general_colors();
+	else if(currPattern == 3)
+		nextLength = pattern_solid_fade();
+	else if(currPattern == 4)
+		nextLength = pattern_circus();
 
 	return nextLength;
 }
@@ -76,16 +78,16 @@ unsigned long SproutLightPatterner::pattern_general_colors() {
 	static int currSpeed = 1;
 
 	if(nextSpeedSwitch <= millis()) {
-		currSpeed = random(3,15);
+		currSpeed = random(8,15);
 		nextSpeedSwitch = millis() + 1000*15;
 	}
 
-	colorWheelSnippetFade(seedArray,   5,   4*currSpeed, 5,   60, 100);
-	colorWheelSnippetFade(hubArray,    5,   6*currSpeed, 0,    0, 255,   true);
+	colorWheelSnippetFade(seedArray,   5,   4*currSpeed, 5,    60, 100);
+	colorWheelSnippetFade(hubArray,    5,   6*currSpeed, 0,     0, 255,   true);
 	colorWheelSnippetFade(petalArray, 10,   2*currSpeed, 10,  125, 235);
-	colorWheelSnippetFade(stemArray,   5,   10*currSpeed, 20,    0,  40);
+	colorWheelSnippetFade(stemArray,   5,   10*currSpeed, 20,   0,  40);
 
-	return 1000*30; // 30 sec
+	return 600000; // 10 min
 }
 
 unsigned long SproutLightPatterner::pattern_solid_fade() {
@@ -97,7 +99,7 @@ unsigned long SproutLightPatterner::pattern_solid_fade() {
 		currWheelChoice = random(255);
 		currSpeed = random(5,15);
 
-		nextSwitch = millis() + 1000*7;
+		nextSwitch = millis() + 1000*10;
 	}
 
 	colorWheelSnippetFade(seedArray,   5,   1, 2*currSpeed,  currWheelChoice, currWheelChoice);
@@ -105,17 +107,37 @@ unsigned long SproutLightPatterner::pattern_solid_fade() {
 	colorWheelSnippetFade(petalArray, 10,   1, 2*currSpeed,  currWheelChoice, currWheelChoice);
 	colorWheelSnippetFade(stemArray,   5,   1, 2*currSpeed,  currWheelChoice, currWheelChoice);
 
-	return 1000*15; // 15 sec
+	return 240000; // 4 min
 }
 
-unsigned long SproutLightPatterner::pattern_disco() {
+unsigned long SproutLightPatterner::pattern_circus() {
+	unsigned long currTime = millis();
+
+	static unsigned long nextSwitch = 0;
+	static int currBright = 1;
+	if(nextSwitch <= millis()) {
+		currBright--;
+		if(currBright < 0)
+			currBright = 4;
+
+		nextSwitch = millis() + 1000*6;
+	}
+
+	int brightnessSpeed = currBright*5;
+	int brightness = 0;
+	if(brightnessSpeed > 0) {
+		int totalBrightSteps = 314;
+		int brightnessAngleIndex = (currTime%(totalBrightSteps*brightnessSpeed))/brightnessSpeed;
+		float cosBright = cos(brightnessAngleIndex/50.0);
+		brightness = (cosBright + 1.0)*1300.0; // never turn it all the way off
+	}
 
 	for(int i=0; i<25; i++) {
-		singleMan->lightMan()->setColorToChannelFromWheelPosition(singleMan->lightMan()->channelArray[i], random(255));
+		singleMan->lightMan()->setColorToChannelFromWheelPosition(singleMan->lightMan()->channelArray[i], random(255), brightness);
 	}
-	delay(35);
+	delay(30);
 
-	return 1000*10; // 10 sec
+	return 120000; // 2 min
 }
 
 void SproutLightPatterner::colorWheelSnippetFade(TLC_CHANNEL_TYPE colorArray[], int arraySize,
@@ -134,9 +156,6 @@ void SproutLightPatterner::colorWheelSnippetFade(TLC_CHANNEL_TYPE colorArray[], 
 			cos(6.28) == 1
 			*/
 
-//			int totalBrightSteps = 628;
-//			int brightnessAngleIndex = (currTime%(totalBrightSteps*brightnessSpeed))/brightnessSpeed;
-//			float cosBright = cos(brightnessAngleIndex/100.0);
 		int totalBrightSteps = 314;
 		int brightnessAngleIndex = (currTime%(totalBrightSteps*brightnessSpeed))/brightnessSpeed;
 		float cosBright = cos(brightnessAngleIndex/50.0);
